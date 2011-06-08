@@ -1,0 +1,47 @@
+<html>
+  <head>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script type="text/javascript" src="jquery.textcomplies.js"></script>
+  </head>
+  <body>
+
+  <input name="password" type="password" id="password" />
+    <input name="password_match" type="password" id="password_match" />
+    <div id="password_compliance">
+    </div>
+    <input type="button" value="submit" id="myButton" />
+    <script>
+      $('#password').textComplies({
+        output: $('#password_compliance'),
+        minLength: 3,
+        maxLength: 12,
+        disallowed: [ ' ', '$', 'password' ],
+        matchField: $('#password_match'),
+        onComplies: passwordComplies,
+        onDefies: passwordDefies
+      });
+
+      function passwordComplies() {
+        $('#myButton').removeAttr('disabled');
+      }
+
+      function passwordDefies() {
+        $('#myButton').attr('disabled', 'disabled');
+      }
+    </script>
+
+    <style>
+      .complies {
+        background-color: green;
+      }
+
+      .defies {
+        background-color: red;
+      }
+
+      #password_compliance {
+        border: 1px solid black;
+      }
+    </style>
+  </body>
+</html>
