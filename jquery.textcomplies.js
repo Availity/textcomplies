@@ -1,7 +1,7 @@
 /*!
  * TextComplies jQuery Plugin
  *
- * Copyright (c) 2011 Availity, LLC
+ * Copyright (c) 2011, 2014 Availity, LLC
  * Licensed under the MIT license
  *
  * Author: Robert Corbin, Robbie Rhoden, Rob Warner
