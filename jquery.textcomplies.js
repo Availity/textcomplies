@@ -15,6 +15,7 @@
         minLengthText : "Must have at least # character%",
         maxLength : -1,
         maxLengthText : "Must have no more than # character%",
+        minAndMaxLengthText : "Must have # to # character%",
         numNumbers : -1,
         numNumbersText : "Must have at least # number%",
         numUppercaseLetters : -1,
@@ -95,7 +96,12 @@
         function buildItem(option, result, message) {
           var item = null;
           if (!(option === null || option === -1 || option.length === 0)) {
-            item = message.replace("#", option).replace("%", option === 1 ? "" : "s").replace("@", listWords(option));
+            var array = (option instanceof Array) ? option : [option];
+            item = message.replace("#", array[0]);
+            for (var index = 1; index < array.length; index++) {
+              item = item.replace("#", array[index]);
+            }
+            item = item.replace("%", array[array.length - 1] === 1 ? "" : "s").replace("@", listWords(option));
           }
           return item === null ? '' : wrapItem(item, result);
         }
@@ -177,7 +183,7 @@
           if (settings.output) {
             var html = "<ul>";
             if (settings.minLength > -1 && settings.maxLength > -1) {
-              html += buildItem(1, results.minLength && results.maxLength, "Must have " + settings.minLength + " - " + settings.maxLength + " characters");
+              html += buildItem([settings.minLength, settings.maxLength], results.minLength && results.maxLength, settings.minAndMaxLengthText);
             } else {
               html += buildItem(settings.minLength, results.minLength, settings.minLengthText);
               html += buildItem(settings.maxLength, results.maxLength, settings.maxLengthText);
