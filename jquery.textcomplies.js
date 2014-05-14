@@ -66,7 +66,7 @@
           results.numUppercaseLetters = countComplies(options.numUppercaseLetters, text, /[A-Z]/g);
           results.numLowercaseLetters = countComplies(options.numLowercaseLetters, text, /[a-z]/g);
           results.disallowed = containsComplies(options.disallowed, text);
-          results.matchField = options.matchField != null && text === $(options.matchField).val();
+          results.matchField = options.matchField !== null && text === $(options.matchField).val();
           return results;
         }
 
@@ -126,7 +126,7 @@
          */
         function containsComplies(option, text) {
           var passes = true;
-          if (option != null) {
+          if (option !== null) {
             for (var i = 0, n = option.length; i < n; i++) {
               if (text.indexOf(option[i]) != -1) {
                 passes = false;
@@ -163,9 +163,9 @@
           var results = complies(fieldForCompliance.val(), settings);
           displayRules(results);
           var allTrue = allPropertiesTrue(results);
-          if (allTrue && settings.onComplies != null) {
+          if (allTrue && settings.onComplies !== null) {
             settings.onComplies();
-          } else if (!allTrue && settings.onDefies != null) {
+          } else if (!allTrue && settings.onDefies !== null) {
             settings.onDefies();
           }
         };
@@ -225,7 +225,7 @@
          * If a matching field was specified, bind keypresses so that the matching
          * compliance is updated as they type in the matching field
          */
-        if (options.matchField != null) {
+        if (options.matchField !== null) {
           $(options.matchField).bind('keyup.textComplies', performComplianceCheck);
         }
       });
@@ -239,7 +239,7 @@
         if (options) {
           $.extend(settings, options);
         }
-        if (settings.matchField != null) {
+        if (settings.matchField !== null) {
           $(settings.matchField).unbind('.textComplies');
         }
       });
