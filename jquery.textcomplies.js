@@ -146,18 +146,17 @@
         /**
          * Returns an HTML version of a CSV list of the words in the specified array,
          * so that users can see a list of the specified words in a reader-friendly format.
-         * A space is converted to the text <space>
+         * A space is converted to the text space
          * @param arr
          */
         function listWords(arr) {
           var result = "";
           for (var i = 0, n = arr.length; i < n; i++) {
-            result += arr[i];
-            if (i < (n - 1)) {
-              result += ",";
-            }
+            var badWord = arr[i].length > 1 ? "'" + arr[i] + "'" : arr[i];
+            result += "," + badWord + "s";
           }
-          result = result.replace(/ /g, "<space>").replace(/,/g, ", ").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+          result = result.length === 0 ? result : result.substring(1)
+          result = result.replace(/ /g, "space").replace(/,/g, ", ").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
           return result;
         }
 
