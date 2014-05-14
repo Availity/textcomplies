@@ -28,6 +28,8 @@
         disallowedText : "Can't contain @",
         matchField : null,
         matchFieldText : "Match in both entry fields",
+        matchPattern : null,
+        matchPatternText : "Must be in a valid format",
         validateOnStart : false,
         showAsFailOnStart : false,
         output : null,
@@ -58,7 +60,8 @@
             numLowercaseLetters : false,
             numLetters : false,
             disallowed : false,
-            matchField : false
+            matchField : false,
+            matchPattern : false
           };
           results.minLength = options.minLength === -1 || (text.length >= options.minLength);
           results.maxLength = options.maxLength === -1 || (text.length <= options.maxLength);
@@ -68,6 +71,7 @@
           results.numLowercaseLetters = countComplies(options.numLowercaseLetters, text, /[a-z]/g);
           results.disallowed = containsComplies(options.disallowed, text);
           results.matchField = options.matchField !== null && text === $(options.matchField).val();
+          results.matchPattern = patternComplies(options.matchPattern, text);
           return results;
         }
 
@@ -144,6 +148,19 @@
         }
 
         /**
+         * Returns whether the text matches a regex
+         * @param option
+         * @param text
+         */
+        function patternComplies(option, text) {
+          var passes = true;
+          if (option !== null) {
+            passes = new RegExp(option).test(text);
+          }
+          return passes;
+        }
+
+        /**
          * Returns an HTML version of a CSV list of the words in the specified array,
          * so that users can see a list of the specified words in a reader-friendly format.
          * A space is converted to the text space
@@ -193,6 +210,7 @@
             html += buildItem(settings.numLowercaseLetters, results.numLowercaseLetters, settings.numLowercaseLettersText);
             html += buildItem(settings.disallowed, results.disallowed, settings.disallowedText);
             html += buildItem(settings.matchField, results.matchField, settings.matchFieldText);
+            html += buildItem(settings.matchPattern, results.matchPattern, settings.matchPatternText);
             html += "</ul>";
             $(settings.output).html(html);
           }
