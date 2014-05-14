@@ -28,6 +28,7 @@
         matchField : null,
         matchFieldText : "Text entry matches",
         validateOnStart : false,
+        showAsFailOnStart : false,
         output : null,
         onComplies : null,
         onDefies : null
@@ -156,10 +157,23 @@
 
         /**
          * Creates the compliance check function that runs the complies function and
-         * builds the html output
+         * calls the function to build the html output
          */
         var performComplianceCheck = function() {
           var results = complies(fieldForCompliance.val(), settings);
+          displayRules(results);
+          var allTrue = allPropertiesTrue(results);
+          if (allTrue && settings.onComplies != null) {
+            settings.onComplies();
+          } else if (!allTrue && settings.onDefies != null) {
+            settings.onDefies();
+          }
+        };
+
+        /**
+         * Builds the html output
+         */
+        var displayRules = function(results) {
           if (settings.output) {
             var html = "<ul>";
             if (settings.minLength > -1 && settings.maxLength > -1) {
@@ -177,18 +191,28 @@
             html += "</ul>";
             $(settings.output).html(html);
           }
-          var allTrue = allPropertiesTrue(results);
-          if (allTrue && settings.onComplies != null) {
-            settings.onComplies();
-          } else if (!allTrue && settings.onDefies != null) {
-            settings.onDefies();
-          }
         };
 
         /**
          * Sets up the plugin to run on each keypress
          */
         $(this).bind('keyup.textComplies', performComplianceCheck);
+
+        /**
+         * You might want to show all the rules on startup with them all failing
+         */
+        if (options.showAsFailOnStart) {
+          displayRules({
+            minLength : false,
+            maxLength : false,
+            numNumbers : false,
+            numUppercaseLetters : false,
+            numLowercaseLetters : false,
+            numLetters : false,
+            disallowed : false,
+            matchField : false,
+          });
+        }
 
         /**
          * Perform the compliance check on startup, if specified
