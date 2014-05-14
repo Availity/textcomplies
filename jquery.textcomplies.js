@@ -5,7 +5,7 @@
  * Licensed under the MIT license
  *
  * Author: Robert Corbin, Robbie Rhoden, Rob Warner
- * Version: 1.0
+ * Version: 1.1
  */
 (function($) {
   var methods = {
