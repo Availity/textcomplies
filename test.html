@@ -18,7 +18,8 @@
         disallowed: [ ' ', '$', 'password' ],
         matchField: $('#password_match'),
         onComplies: passwordComplies,
-        onDefies: passwordDefies
+        onDefies: passwordDefies,
+        validateOnStart: true
       });
 
       function passwordComplies() {

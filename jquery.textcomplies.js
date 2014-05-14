@@ -27,6 +27,7 @@
         disallowedText : "Can't contain @",
         matchField : null,
         matchFieldText : "Text entry matches",
+        validateOnStart : false,
         output : null,
         onComplies : null,
         onDefies : null
@@ -188,6 +189,13 @@
          * Sets up the plugin to run on each keypress
          */
         $(this).bind('keyup.textComplies', performComplianceCheck);
+
+        /**
+         * Perform the compliance check on startup, if specified
+         */
+        if (options.validateOnStart) {
+          performComplianceCheck();
+        }
 
         /**
          * If a matching field was specified, bind keypresses so that the matching
