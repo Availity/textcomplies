@@ -97,8 +97,8 @@
           var item = null;
           if (!(option === null || option === -1 || option.length === 0)) {
             var array = (option instanceof Array) ? option : [option];
-            item = message.replace("#", array[0]);
-            for (var index = 1; index < array.length; index++) {
+            item = message;
+            for (var index = 0; index < array.length; index++) {
               item = item.replace("#", array[index]);
             }
             item = item.replace("%", array[array.length - 1] === 1 ? "" : "s").replace("@", listWords(option));
