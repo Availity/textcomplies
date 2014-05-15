@@ -54,6 +54,18 @@ Text Complies allows you to configure several preset rules for compliance checki
       <td>The selector of a text field whose input must match the text</td>
     </tr>
     <tr>
+      <td>matchPattern</td>
+      <td>The regular expression that the text must match</td>
+    </tr>
+    <tr>
+      <td>validateOnStart</td>
+    <td>If <code>true</code>, runs validation on start, before waiting for a keypress</td>
+    </tr>
+    <tr>
+      <td>showAsFailOnStart</td>
+      <td>If <code>true</code>, shows the rules on start with them all failing</td>
+    </tr>
+    <tr>
       <td>onComplies</td>
       <td>A JavaScript method to run if the new text complies with all the configured rules</td>
     </tr>
