@@ -8,6 +8,8 @@
  * Version: 1.1
  */
 (function($) {
+  "use strict";
+
   var methods = {
     init : function(options) {
       var settings = {
@@ -80,15 +82,13 @@
          * are true
          * @param obj
          */
-        function allPropertiesTrue(obj) {
-          var allTrue = true;
+        function allRulesPass(obj) {
           for (var property in obj) {
             if (obj.hasOwnProperty(property) && !obj[property]) {
-              allTrue = false;
-              break;
+              return false;
             }
           }
-          return allTrue;
+          return true;
         }
 
         /**
@@ -122,7 +122,7 @@
          */
         function countComplies(option, text, regex) {
           var passes = true;
-          if (option != -1) {
+          if (option !== -1) {
             var matches = text.match(regex);
             passes = (matches && (matches.length >= option));
           }
@@ -138,7 +138,7 @@
           var passes = true;
           if (option !== null) {
             for (var i = 0, n = option.length; i < n; i++) {
-              if (text.indexOf(option[i]) != -1) {
+              if (text.indexOf(option[i]) !== -1) {
                 passes = false;
                 break;
               }
@@ -153,11 +153,7 @@
          * @param text
          */
         function patternComplies(option, text) {
-          var passes = true;
-          if (option !== null) {
-            passes = new RegExp(option).test(text);
-          }
-          return passes;
+          return option === null || new RegExp(option).test(text);
         }
 
         /**
@@ -172,7 +168,7 @@
             var badWord = arr[i].length > 1 ? "'" + arr[i] + "'" : arr[i];
             result += "," + badWord + "s";
           }
-          result = result.length === 0 ? result : result.substring(1)
+          result = result.length === 0 ? result : result.substring(1);
           result = result.replace(/ /g, "space").replace(/,/g, ", ").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
           return result;
         }
@@ -184,10 +180,10 @@
         var performComplianceCheck = function() {
           var results = complies(fieldForCompliance.val(), settings);
           displayRules(results);
-          var allTrue = allPropertiesTrue(results);
-          if (allTrue && settings.onComplies !== null) {
+          var allPass = allRulesPass(results);
+          if (allPass && settings.onComplies !== null) {
             settings.onComplies();
-          } else if (!allTrue && settings.onDefies !== null) {
+          } else if (!allPass && settings.onDefies !== null) {
             settings.onDefies();
           }
         };
