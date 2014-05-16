@@ -11,32 +11,32 @@
   "use strict";
 
   var methods = {
-    init : function(options) {
+    init: function(options) {
       var settings = {
-        minLength : -1,
-        minLengthText : "Have at least # character%",
-        maxLength : -1,
-        maxLengthText : "Have no more than # character%",
-        minAndMaxLengthText : "Have # to # character%",
-        numNumbers : -1,
-        numNumbersText : "Have at least # number%",
-        numUppercaseLetters : -1,
-        numUppercaseLettersText : "Have at least # uppercase letter%",
-        numLowercaseLetters : -1,
-        numLowercaseLettersText : "Have at least # lowercase letter%",
-        numLetters : -1,
-        numLettersText : "Have at least # letter%",
-        disallowed : null,
-        disallowedText : "Can't contain @",
-        matchField : null,
-        matchFieldText : "Match in both entry fields",
-        matchPattern : null,
-        matchPatternText : "Must be in a valid format",
-        validateOnStart : false,
-        showAsFailOnStart : false,
-        output : null,
-        onComplies : null,
-        onDefies : null
+        minLength: -1,
+        minLengthText: "Have at least # character%",
+        maxLength: -1,
+        maxLengthText: "Have no more than # character%",
+        minAndMaxLengthText: "Have # to # character%",
+        numNumbers: -1,
+        numNumbersText: "Have at least # number%",
+        numUppercaseLetters: -1,
+        numUppercaseLettersText: "Have at least # uppercase letter%",
+        numLowercaseLetters: -1,
+        numLowercaseLettersText: "Have at least # lowercase letter%",
+        numLetters: -1,
+        numLettersText: "Have at least # letter%",
+        disallowed: null,
+        disallowedText: "Can't contain @",
+        matchField: null,
+        matchFieldText: "Match in both entry fields",
+        matchPattern: null,
+        matchPatternText: "Must be in a valid format",
+        validateOnStart: false,
+        showAsFailOnStart: false,
+        output: null,
+        onComplies: null,
+        onDefies: null
       };
 
       if (options) {
@@ -55,15 +55,15 @@
          */
         function complies(text, options) {
           var results = {
-            minLength : false,
-            maxLength : false,
-            numNumbers : false,
-            numUppercaseLetters : false,
-            numLowercaseLetters : false,
-            numLetters : false,
-            disallowed : false,
-            matchField : false,
-            matchPattern : false
+            minLength: false,
+            maxLength: false,
+            numNumbers: false,
+            numUppercaseLetters: false,
+            numLowercaseLetters: false,
+            numLetters: false,
+            disallowed: false,
+            matchField: false,
+            matchPattern: false
           };
           results.minLength = options.minLength === -1 || (text.length >= options.minLength);
           results.maxLength = options.maxLength === -1 || (text.length <= options.maxLength);
@@ -222,14 +222,14 @@
          */
         if (options.showAsFailOnStart) {
           displayRules({
-            minLength : false,
-            maxLength : false,
-            numNumbers : false,
-            numUppercaseLetters : false,
-            numLowercaseLetters : false,
-            numLetters : false,
-            disallowed : false,
-            matchField : false,
+            minLength: false,
+            maxLength: false,
+            numNumbers: false,
+            numUppercaseLetters: false,
+            numLowercaseLetters: false,
+            numLetters: false,
+            disallowed: false,
+            matchField: false,
           });
         }
 
@@ -249,11 +249,11 @@
         }
       });
     },
-    destroy : function(options) {
+    destroy: function(options) {
       return this.each(function() {
         $(this).unbind('.textComplies');
         var settings = {
-          matchField : null
+          matchField: null
         };
         if (options) {
           $.extend(settings, options);
