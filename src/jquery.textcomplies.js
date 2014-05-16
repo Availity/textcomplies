@@ -42,6 +42,7 @@
       if (options) {
         $.extend(settings, options);
       }
+
       return this.each(function() {
         /**
          * Get a pointer to the field to check
@@ -121,12 +122,11 @@
          * @param regex
          */
         function countComplies(option, text, regex) {
-          var passes = true;
           if (option !== -1) {
             var matches = text.match(regex);
-            passes = (matches && (matches.length >= option));
+            return (matches && (matches.length >= option));
           }
-          return passes;
+          return true;
         }
 
         /**
@@ -135,16 +135,14 @@
          * @param text
          */
         function containsComplies(option, text) {
-          var passes = true;
           if (option !== null) {
             for (var i = 0, n = option.length; i < n; i++) {
               if (text.indexOf(option[i]) !== -1) {
-                passes = false;
-                break;
+                return false;
               }
             }
           }
-          return passes;
+          return true;
         }
 
         /**
@@ -249,6 +247,7 @@
         }
       });
     },
+
     destroy: function(options) {
       return this.each(function() {
         $(this).unbind('.textComplies');
@@ -275,3 +274,4 @@
     }
   };
 })(jQuery);
+
