@@ -164,10 +164,10 @@
           var result = "";
           for (var i = 0, n = arr.length; i < n; i++) {
             var badWord = arr[i].length > 1 ? "'" + arr[i] + "'" : arr[i];
-            result += "," + badWord + "s";
+            result += "," + badWord;
           }
           result = result.length === 0 ? result : result.substring(1);
-          result = result.replace(/ /g, "space").replace(/,/g, ", ").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+          result = result.replace(/ /g, "spaces").replace(/,/g, ", ").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
           return result;
         }
 

@@ -176,5 +176,121 @@ define(function(require) {
       });
       expect($("#password-compliance").html()).toEqual('<ul><li class="defies">Have at least 5 uppercase letters</li></ul>');
     });
+
+    it("complies when minimum length matches", function() {
+      var input = $("#my-password");
+      input.val('password');
+      input.textComplies({
+        minLength: 6,
+        output: $("#password-compliance"),
+        validateOnStart: true
+      });
+      expect($("#password-compliance").html()).toEqual('<ul><li class="complies">Have at least 6 characters</li></ul>');
+    });
+
+    it("defies when minimum length doesn't match", function() {
+      var input = $("#my-password");
+      input.val('password');
+      input.textComplies({
+        minLength: 12,
+        output: $("#password-compliance"),
+        validateOnStart: true
+      });
+      expect($("#password-compliance").html()).toEqual('<ul><li class="defies">Have at least 12 characters</li></ul>');
+    });
+
+    it("complies when maximum length matches", function() {
+      var input = $("#my-password");
+      input.val('password');
+      input.textComplies({
+        maxLength: 8,
+        output: $("#password-compliance"),
+        validateOnStart: true
+      });
+      expect($("#password-compliance").html()).toEqual('<ul><li class="complies">Have no more than 8 characters</li></ul>');
+    });
+
+    it("defies when maximum length doesn't match", function() {
+      var input = $("#my-password");
+      input.val('password');
+      input.textComplies({
+        maxLength: 4,
+        output: $("#password-compliance"),
+        validateOnStart: true
+      });
+      expect($("#password-compliance").html()).toEqual('<ul><li class="defies">Have no more than 4 characters</li></ul>');
+    });
+
+    it("complies when minimum and maximum length match", function() {
+      var input = $("#my-password");
+      input.val('password');
+      input.textComplies({
+        minLength: 6,
+        maxLength: 8,
+        output: $("#password-compliance"),
+        validateOnStart: true
+      });
+      expect($("#password-compliance").html()).toEqual('<ul><li class="complies">Have 6 to 8 characters</li></ul>');
+    });
+
+    it("defies when minimum and maximum length don't match", function() {
+      var input = $("#my-password");
+      input.val('password');
+      input.textComplies({
+        minLength: 2,
+        maxLength: 4,
+        output: $("#password-compliance"),
+        validateOnStart: true
+      });
+      expect($("#password-compliance").html()).toEqual('<ul><li class="defies">Have 2 to 4 characters</li></ul>');
+    });
+
+    it("complies when disallowed characters aren't present", function() {
+      var input = $("#my-password");
+      input.val('passwort');
+      input.textComplies({
+        disallowed: [' ', 'password'],
+        output: $("#password-compliance"),
+        validateOnStart: true
+      });
+      expect($("#password-compliance").html()).toEqual('<ul><li class="complies">Can\'t contain spaces, \'password\'</li></ul>');
+    });
+
+    it("defies when disallowed characters are present", function() {
+      var input = $("#my-password");
+      input.val('password');
+      input.textComplies({
+        disallowed: [' ', 'password'],
+        output: $("#password-compliance"),
+        validateOnStart: true
+      });
+      expect($("#password-compliance").html()).toEqual('<ul><li class="defies">Can\'t contain spaces, \'password\'</li></ul>');
+    });
+
+    it("complies when both fields match", function() {
+      $("#password-match").val('password');
+
+      var input = $("#my-password");
+      input.val('password');
+      input.textComplies({
+        matchField: $("#password-match"),
+        output: $("#password-compliance"),
+        validateOnStart: true
+      });
+      expect($("#password-compliance").html()).toEqual('<ul><li class="complies">Match in both entry fields</li></ul>');
+    });
+
+    it("defies when both fields don't match", function() {
+      $("#password-match").val('bortles');
+
+      var input = $("#my-password");
+      input.val('password');
+      input.textComplies({
+        matchField: $("#password-match"),
+        output: $("#password-compliance"),
+        validateOnStart: true
+      });
+      expect($("#password-compliance").html()).toEqual('<ul><li class="defies">Match in both entry fields</li></ul>');
+    });
   });
 });
