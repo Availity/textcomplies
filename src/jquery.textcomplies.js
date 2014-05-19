@@ -73,7 +73,7 @@
           results.numUppercaseLetters = countComplies(options.numUppercaseLetters, text, /[A-Z]/g);
           results.numLowercaseLetters = countComplies(options.numLowercaseLetters, text, /[a-z]/g);
           results.disallowed = containsComplies(options.disallowed, text);
-          results.matchField = options.matchField !== null && text === $(options.matchField).val();
+          results.matchField = options.matchField === null || text === $(options.matchField).val();
           results.matchPattern = patternComplies(options.matchPattern, text);
           return results;
         }
@@ -228,7 +228,6 @@
             numLowercaseLetters: false,
             numLetters: false,
             disallowed: false,
-            matchField: false,
           });
         }
 

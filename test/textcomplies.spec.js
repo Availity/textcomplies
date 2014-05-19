@@ -384,5 +384,42 @@ define(function(require) {
         expect($("#password-compliance").html()).toEqual('<ul><li class="defies">Can\'t contain spaces</li></ul>');
       });
     });
+
+    // On complies and on defies
+    describe("on complies and on defies", function() {
+      it("should call onComplies when all tests comply", function() {
+        var input = $("#my-password");
+        input.val('abc');
+        input.textComplies({
+          minLength: 3,
+          disallowed: [' '],
+          onComplies: function() {
+            expect(true).toEqual(true);
+          },
+          onDefies: function() {
+        expect($("#password-compliance").html()).toEqual('');
+            expect(false).toEqual(true);
+          },
+          output: $("#password-compliance"),
+          validateOnStart: true
+        });
+      });
+
+      it("should call onDefies when any tests defy", function() {
+        var input = $("#my-password");
+        input.val('abc ');
+        input.textComplies({
+          minLength: 3,
+          disallowed: [' '],
+          onComplies: function() {
+            expect(false).toEqual(true);
+          },
+          onDefies: function() {
+            expect(true).toEqual(true);
+          },
+          validateOnStart: true
+        });
+      });
+    });
   });
 });
