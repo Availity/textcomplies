@@ -213,10 +213,10 @@
             html += buildItem(settings.numLetters, results.numLetters, settings.numLettersText);
             html += buildItem(settings.numUppercaseLetters, results.numUppercaseLetters, settings.numUppercaseLettersText);
             html += buildItem(settings.numLowercaseLetters, results.numLowercaseLetters, settings.numLowercaseLettersText);
-            html += buildItem(settings.disallowed, results.disallowed, settings.disallowedText);
-            html += buildItem(settings.matchField, results.matchField, settings.matchFieldText);
             html += buildItem(settings.matchPattern, results.matchPattern, settings.matchPatternText);
             html += buildItem(settings.disallowedPattern, results.disallowedPattern, settings.disallowedPatternText);
+            html += buildItem(settings.disallowed, results.disallowed, settings.disallowedText);
+            html += buildItem(settings.matchField, results.matchField, settings.matchFieldText);
             html += "</ul>";
             $(settings.output).html(html);
           }
