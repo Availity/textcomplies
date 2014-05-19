@@ -410,7 +410,6 @@ define(function(require) {
             expect(true).toEqual(true);
           },
           onDefies: function() {
-        expect($("#password-compliance").html()).toEqual('');
             expect(false).toEqual(true);
           },
           output: $("#password-compliance"),
