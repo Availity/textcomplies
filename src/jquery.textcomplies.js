@@ -32,6 +32,8 @@
         matchFieldText: "Match in both entry fields",
         matchPattern: null,
         matchPatternText: "Must be in a valid format",
+        disallowedPattern: null,
+        disallowedPatternText: "Must be in a valid format",
         validateOnStart: false,
         showAsFailOnStart: false,
         output: null,
@@ -55,17 +57,7 @@
          * @param options
          */
         function complies(text, options) {
-          var results = {
-            minLength: false,
-            maxLength: false,
-            numNumbers: false,
-            numUppercaseLetters: false,
-            numLowercaseLetters: false,
-            numLetters: false,
-            disallowed: false,
-            matchField: false,
-            matchPattern: false
-          };
+          var results = {};
           results.minLength = options.minLength === -1 || (text.length >= options.minLength);
           results.maxLength = options.maxLength === -1 || (text.length <= options.maxLength);
           results.numNumbers = countComplies(options.numNumbers, text, /[0-9]/g);
@@ -75,6 +67,7 @@
           results.disallowed = containsComplies(options.disallowed, text);
           results.matchField = options.matchField === null || text === $(options.matchField).val();
           results.matchPattern = patternComplies(options.matchPattern, text);
+          results.disallowedPattern = disallowedPatternComplies(options.disallowedPattern, text);
           return results;
         }
 
@@ -155,6 +148,15 @@
         }
 
         /**
+         * Returns whether the text doesn't match a regex
+         * @param option
+         * @param text
+         */
+        function disallowedPatternComplies(option, text) {
+          return option === null || !(new RegExp(option).test(text));
+        }
+
+        /**
          * Returns an HTML version of a CSV list of the words in the specified array,
          * so that users can see a list of the specified words in a reader-friendly format.
          * A space is converted to the text space
@@ -206,6 +208,7 @@
             html += buildItem(settings.disallowed, results.disallowed, settings.disallowedText);
             html += buildItem(settings.matchField, results.matchField, settings.matchFieldText);
             html += buildItem(settings.matchPattern, results.matchPattern, settings.matchPatternText);
+            html += buildItem(settings.disallowedPattern, results.disallowedPattern, settings.disallowedPatternText);
             html += "</ul>";
             $(settings.output).html(html);
           }

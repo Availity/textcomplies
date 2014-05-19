@@ -47,6 +47,28 @@ define(function(require) {
         });
         expect($("#password-compliance").html()).toEqual('<ul><li class="defies">Must be in a valid format</li></ul>');
       });
+
+      it("complies when disallowed pattern doesn't match", function() {
+        var input = $("#my-password");
+        input.val('test123');
+        input.textComplies({
+          disallowedPattern: "^[A-Za-z]+$",
+          output: $("#password-compliance"),
+          validateOnStart: true
+        });
+        expect($("#password-compliance").html()).toEqual('<ul><li class="complies">Must be in a valid format</li></ul>');
+      });
+
+      it("defies when disallowed pattern matches", function() {
+        var input = $("#my-password");
+        input.val('test');
+        input.textComplies({
+          disallowedPattern: "^[A-Za-z]+$",
+          output: $("#password-compliance"),
+          validateOnStart: true
+        });
+        expect($("#password-compliance").html()).toEqual('<ul><li class="defies">Must be in a valid format</li></ul>');
+      });
     });
 
     // Number of numbers
