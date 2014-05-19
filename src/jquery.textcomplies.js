@@ -18,6 +18,7 @@
         maxLength: -1,
         maxLengthText: "Have no more than # character%",
         minAndMaxLengthText: "Have # to # character%",
+        showNumbersAsWords: false,
         numNumbers: -1,
         numNumbersText: "Have at least # number%",
         numUppercaseLetters: -1,
@@ -48,6 +49,8 @@
       }
 
       return this.each(function() {
+        var numbers = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+
         /**
          * Get a pointer to the field to check
          */
@@ -99,7 +102,8 @@
             var array = (option instanceof Array) ? option : [option];
             item = message;
             for (var index = 0; index < array.length; index++) {
-              item = item.replace("#", array[index]);
+              var num = (settings.showNumbersAsWords && array[index] < numbers.length) ? numbers[array[index]] : array[index];
+              item = item.replace("#", num);
             }
             item = item.replace("%", array[array.length - 1] === 1 ? "" : "s").replace("@", listWords(option));
           }

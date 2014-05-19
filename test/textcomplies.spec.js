@@ -238,6 +238,81 @@ define(function(require) {
       });
     });
 
+    // Show numbers as words
+    describe("show numbers as words", function() {
+      it("shows words for numbers in numbers when less than 10", function() {
+        var input = $("#my-password");
+        input.val('123456789');
+        input.textComplies({
+          showNumbersAsWords: true,
+          numNumbers: 9,
+          output: $("#password-compliance"),
+          validateOnStart: true
+        });
+        expect($("#password-compliance").html()).toEqual('<ul><li class="complies">Have at least nine numbers</li></ul>');
+      });
+
+      it("shows numbers for numbers in numbers when greater than 9", function() {
+        var input = $("#my-password");
+        input.val('1234567890');
+        input.textComplies({
+          showNumbersAsWords: true,
+          numNumbers: 10,
+          output: $("#password-compliance"),
+          validateOnStart: true
+        });
+        expect($("#password-compliance").html()).toEqual('<ul><li class="complies">Have at least 10 numbers</li></ul>');
+      });
+
+      it("shows words for numbers in lowercase letters when less than 10", function() {
+        var input = $("#my-password");
+        input.val('passwords');
+        input.textComplies({
+          showNumbersAsWords: true,
+          numLowercaseLetters: 9,
+          output: $("#password-compliance"),
+          validateOnStart: true
+        });
+        expect($("#password-compliance").html()).toEqual('<ul><li class="complies">Have at least nine lowercase letters</li></ul>');
+      });
+
+      it("shows numbers for numbers in lowercase letters when greater than 9", function() {
+        var input = $("#my-password");
+        input.val('passwordss');
+        input.textComplies({
+          showNumbersAsWords: true,
+          numLowercaseLetters: 10,
+          output: $("#password-compliance"),
+          validateOnStart: true
+        });
+        expect($("#password-compliance").html()).toEqual('<ul><li class="complies">Have at least 10 lowercase letters</li></ul>');
+      });
+
+      it("shows words for numbers in uppercase letters when less than 10", function() {
+        var input = $("#my-password");
+        input.val('PASSWORDS');
+        input.textComplies({
+          showNumbersAsWords: true,
+          numUppercaseLetters: 9,
+          output: $("#password-compliance"),
+          validateOnStart: true
+        });
+        expect($("#password-compliance").html()).toEqual('<ul><li class="complies">Have at least nine uppercase letters</li></ul>');
+      });
+
+      it("shows numbers for numbers in uppercase letters when greater than 9", function() {
+        var input = $("#my-password");
+        input.val('PASSWORDSS');
+        input.textComplies({
+          showNumbersAsWords: true,
+          numUppercaseLetters: 10,
+          output: $("#password-compliance"),
+          validateOnStart: true
+        });
+        expect($("#password-compliance").html()).toEqual('<ul><li class="complies">Have at least 10 uppercase letters</li></ul>');
+      });
+    });
+
     // Minimum length
     describe("minimum length", function() {
       it("complies when minimum length matches", function() {
