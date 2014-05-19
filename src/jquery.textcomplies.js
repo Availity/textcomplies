@@ -31,8 +31,10 @@
         matchField: null,
         matchFieldText: "Match in both entry fields",
         matchPattern: null,
+        matchPatternCaseSensitive: true,
         matchPatternText: "Must be in a valid format",
         disallowedPattern: null,
+        disallowedPatternCaseSensitive: true,
         disallowedPatternText: "Must be in a valid format",
         validateOnStart: false,
         showAsFailOnStart: false,
@@ -66,8 +68,8 @@
           results.numLowercaseLetters = countComplies(options.numLowercaseLetters, text, /[a-z]/g);
           results.disallowed = containsComplies(options.disallowed, text);
           results.matchField = options.matchField === null || text === $(options.matchField).val();
-          results.matchPattern = patternComplies(options.matchPattern, text);
-          results.disallowedPattern = disallowedPatternComplies(options.disallowedPattern, text);
+          results.matchPattern = patternComplies(options.matchPattern, options.matchPatternCaseSensitive, text);
+          results.disallowedPattern = disallowedPatternComplies(options.disallowedPattern, options.disallowedPatternCaseSensitive, text);
           return results;
         }
 
@@ -143,8 +145,10 @@
          * @param option
          * @param text
          */
-        function patternComplies(option, text) {
-          return option === null || new RegExp(option).test(text);
+        function patternComplies(option, caseSensitive, text) {
+          var modifiers = "";
+          if (!caseSensitive) modifiers += "i";
+          return option === null || new RegExp(option, modifiers).test(text);
         }
 
         /**
@@ -152,8 +156,8 @@
          * @param option
          * @param text
          */
-        function disallowedPatternComplies(option, text) {
-          return option === null || !(new RegExp(option).test(text));
+        function disallowedPatternComplies(option, caseSensitive, text) {
+          return option === null || !patternComplies(option, caseSensitive, text);
         }
 
         /**

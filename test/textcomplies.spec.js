@@ -48,11 +48,36 @@ define(function(require) {
         expect($("#password-compliance").html()).toEqual('<ul><li class="defies">Must be in a valid format</li></ul>');
       });
 
+      it("complies when pattern matches case insensitive", function() {
+        var input = $("#my-password");
+        input.val('TEST');
+        input.textComplies({
+          matchPattern: "^test$",
+          matchPatternCaseSensitive: false,
+          output: $("#password-compliance"),
+          validateOnStart: true
+        });
+        expect($("#password-compliance").html()).toEqual('<ul><li class="complies">Must be in a valid format</li></ul>');
+      });
+
+      it("defies when pattern doesn't match case insensitive", function() {
+        var input = $("#my-password");
+        input.val('TEST123');
+        input.textComplies({
+          matchPattern: "^test$",
+          matchPatternCaseSensitive: false,
+          output: $("#password-compliance"),
+          validateOnStart: true
+        });
+        expect($("#password-compliance").html()).toEqual('<ul><li class="defies">Must be in a valid format</li></ul>');
+      });
+
       it("complies when disallowed pattern doesn't match", function() {
         var input = $("#my-password");
-        input.val('test123');
+        input.val('TEST123');
         input.textComplies({
-          disallowedPattern: "^[A-Za-z]+$",
+          disallowedPattern: "^test$",
+          disallowedPatternCaseSensitive: false,
           output: $("#password-compliance"),
           validateOnStart: true
         });
@@ -61,9 +86,10 @@ define(function(require) {
 
       it("defies when disallowed pattern matches", function() {
         var input = $("#my-password");
-        input.val('test');
+        input.val('TEST');
         input.textComplies({
-          disallowedPattern: "^[A-Za-z]+$",
+          disallowedPattern: "^test$",
+          disallowedPatternCaseSensitive: false,
           output: $("#password-compliance"),
           validateOnStart: true
         });
