@@ -240,6 +240,67 @@ define(function(require) {
 
     // Show numbers as words
     describe("show numbers as words", function() {
+      it("shows words for numbers in min length when less than 10", function() {
+        var input = $("#my-password");
+        input.val('123456789');
+        input.textComplies({
+          showNumbersAsWords: true,
+          minLength: 9,
+          output: $("#password-compliance"),
+          validateOnStart: true
+        });
+        expect($("#password-compliance").html()).toEqual('<ul><li class="complies">Have at least nine characters</li></ul>');
+      });
+
+      it("shows numbers for numbers in min length when greater than 9", function() {
+        var input = $("#my-password");
+        input.val('1234567890');
+        input.textComplies({
+          showNumbersAsWords: true,
+          minLength: 10,
+          output: $("#password-compliance"),
+          validateOnStart: true
+        });
+        expect($("#password-compliance").html()).toEqual('<ul><li class="complies">Have at least 10 characters</li></ul>');
+      });
+
+      it("shows words for numbers in max length when less than 10", function() {
+        var input = $("#my-password");
+        input.val('123456789');
+        input.textComplies({
+          showNumbersAsWords: true,
+          maxLength: 9,
+          output: $("#password-compliance"),
+          validateOnStart: true
+        });
+        expect($("#password-compliance").html()).toEqual('<ul><li class="complies">Have no more than nine characters</li></ul>');
+      });
+
+      it("shows numbers for numbers in max length when greater than 9", function() {
+        var input = $("#my-password");
+        input.val('1234567890');
+        input.textComplies({
+          showNumbersAsWords: true,
+          maxLength: 10,
+          output: $("#password-compliance"),
+          validateOnStart: true
+        });
+        expect($("#password-compliance").html()).toEqual('<ul><li class="complies">Have no more than 10 characters</li></ul>');
+      });
+
+      it("shows numbers for numbers in min and max length", function() {
+        var input = $("#my-password");
+        input.val('123456789');
+        input.textComplies({
+          showNumbersAsWords: true,
+          minLength: 5,
+          maxLength: 15,
+          output: $("#password-compliance"),
+          validateOnStart: true
+        });
+        expect($("#password-compliance").html()).toEqual('<ul><li class="complies">Have 5 to 15 characters</li></ul>');
+      });
+
       it("shows words for numbers in numbers when less than 10", function() {
         var input = $("#my-password");
         input.val('123456789');

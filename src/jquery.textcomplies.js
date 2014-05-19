@@ -96,12 +96,16 @@
          */
         function buildItem(option, result, message) {
           var numbers = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+
+          // Always show ranges as numbers
+          var showNumbersAsWords = settings.showNumbersAsWords && !(option instanceof Array);
+
           var item = null;
           if (!(option === null || option === -1 || option.length === 0)) {
             var array = (option instanceof Array) ? option : [option];
             item = message;
             for (var index = 0; index < array.length; index++) {
-              var num = (settings.showNumbersAsWords && array[index] < numbers.length) ? numbers[array[index]] : array[index];
+              var num = (showNumbersAsWords && array[index] < numbers.length) ? numbers[array[index]] : array[index];
               item = item.replace("#", num);
             }
             item = item.replace("%", array[array.length - 1] === 1 ? "" : "s").replace("@", listWords(option));
