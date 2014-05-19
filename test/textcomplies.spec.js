@@ -421,5 +421,20 @@ define(function(require) {
         });
       });
     });
+
+    // Custom text
+    describe("custom text", function() {
+      it("should use custom text when defined", function() {
+        var input = $("#my-password");
+        input.val(' ');
+        input.textComplies({
+          disallowed: [' '],
+          disallowedText: "My custom text",
+          output: $("#password-compliance"),
+          validateOnStart: true
+        });
+        expect($("#password-compliance").html()).toEqual('<ul><li class="defies">My custom text</li></ul>');
+      });
+    });
   });
 });
