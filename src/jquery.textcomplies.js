@@ -49,8 +49,6 @@
       }
 
       return this.each(function() {
-        var numbers = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
-
         /**
          * Get a pointer to the field to check
          */
@@ -97,6 +95,7 @@
          * @param message
          */
         function buildItem(option, result, message) {
+          var numbers = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
           var item = null;
           if (!(option === null || option === -1 || option.length === 0)) {
             var array = (option instanceof Array) ? option : [option];
