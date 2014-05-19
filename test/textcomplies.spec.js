@@ -327,6 +327,10 @@ define(function(require) {
         expect($("#password-compliance").is(':hidden')).toBe(true);
         var input =  $("#my-password");
         input.textComplies({
+          minLength: 5,
+          maxLength: 15,
+          matchField: $("#password-match"),
+          disallowed: ["a", "b"],
           output: $("#password-compliance"),
           showAsFailOnStart: false
         });
@@ -337,10 +341,19 @@ define(function(require) {
         expect($("#password-compliance").is(':hidden')).toBe(true);
         var input =  $("#my-password");
         input.textComplies({
+          minLength: 5,
+          maxLength: 15,
+          matchField: $("#password-match"),
+          disallowed: ["a", "b"],
           output: $("#password-compliance"),
           showAsFailOnStart: true
         });
         expect($("#password-compliance").is(':hidden')).toBe(false);
+
+        // Expect all the fields to defy
+        $("#password-compliance").find("li").each(function() {
+          expect($(this).hasClass("defies")).toBe(true);
+        });
       });
     });
 

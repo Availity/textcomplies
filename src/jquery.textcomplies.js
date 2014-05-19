@@ -221,13 +221,6 @@
          */
         if (options.showAsFailOnStart) {
           displayRules({
-            minLength: false,
-            maxLength: false,
-            numNumbers: false,
-            numUppercaseLetters: false,
-            numLowercaseLetters: false,
-            numLetters: false,
-            disallowed: false,
           });
         }
 
