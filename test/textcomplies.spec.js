@@ -368,5 +368,21 @@ define(function(require) {
         expect($("#password-compliance").html()).toEqual('');
       });
     });
+
+    // Key up
+    describe("key up", function() {
+      it("should validate on key up", function() {
+        var input = $("#my-password");
+        input.val(' ');
+        input.textComplies({
+          disallowed: [' '],
+          output: $("#password-compliance"),
+          validateOnStart: false
+        });
+        expect($("#password-compliance").html()).toEqual('');
+        input.keyup();
+        expect($("#password-compliance").html()).toEqual('<ul><li class="defies">Can\'t contain spaces</li></ul>');
+      });
+    });
   });
 });
