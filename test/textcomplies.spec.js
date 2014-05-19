@@ -327,7 +327,6 @@ define(function(require) {
         expect($("#password-compliance").is(':hidden')).toBe(true);
         var input =  $("#my-password");
         input.textComplies({
-          disallowed: [' '],
           output: $("#password-compliance"),
           showAsFailOnStart: false
         });
@@ -338,11 +337,35 @@ define(function(require) {
         expect($("#password-compliance").is(':hidden')).toBe(true);
         var input =  $("#my-password");
         input.textComplies({
-          disallowed: [' '],
           output: $("#password-compliance"),
           showAsFailOnStart: true
         });
         expect($("#password-compliance").is(':hidden')).toBe(false);
+      });
+    });
+
+    // Validate on start
+    describe("validate on start", function() {
+      it("should validate on start when set", function() {
+        var input = $("#my-password");
+        input.val(' ');
+        input.textComplies({
+          disallowed: [' '],
+          output: $("#password-compliance"),
+          validateOnStart: true
+        });
+        expect($("#password-compliance").html()).toEqual('<ul><li class="defies">Can\'t contain spaces</li></ul>');
+      });
+
+      it("should not validate on start when not set", function() {
+        var input = $("#my-password");
+        input.val(' ');
+        input.textComplies({
+          disallowed: [' '],
+          output: $("#password-compliance"),
+          validateOnStart: false
+        });
+        expect($("#password-compliance").html()).toEqual('');
       });
     });
   });
