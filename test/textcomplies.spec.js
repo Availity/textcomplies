@@ -9,12 +9,13 @@ define(function(require) {
   "use strict";
 
   require("src/jquery.textcomplies");
+
   describe("textcomplies", function() {
 
     beforeEach(function() {
       $('<input id="my-password" type="password">').appendTo('body');
       $('<input id="password-match" type="password" />').appendTo('body');
-      $('<div id="password-compliance"></div>').appendTo('body');
+      $('<div id="password-compliance" style="display:none;"></div>').appendTo('body');
     });
 
     afterEach(function() {
@@ -317,6 +318,31 @@ define(function(require) {
           validateOnStart: true
         });
         expect($("#password-compliance").html()).toEqual('<ul><li class="defies">Match in both entry fields</li></ul>');
+      });
+    });
+
+    // Show as fail on start
+    describe("show as fail on start", function() {
+      it("should not be visible when show on fail not set", function() {
+        expect($("#password-compliance").is(':hidden')).toBe(true);
+        var input =  $("#my-password");
+        input.textComplies({
+          disallowed: [' '],
+          output: $("#password-compliance"),
+          showAsFailOnStart: false
+        });
+        expect($("#password-compliance").is(':hidden')).toBe(true);
+      });
+
+      it("should be visible when show on fail set", function() {
+        expect($("#password-compliance").is(':hidden')).toBe(true);
+        var input =  $("#my-password");
+        input.textComplies({
+          disallowed: [' '],
+          output: $("#password-compliance"),
+          showAsFailOnStart: true
+        });
+        expect($("#password-compliance").is(':hidden')).toBe(false);
       });
     });
   });

@@ -7,7 +7,7 @@
 
   <input name="password" type="password" id="password" />
     <input name="password_match" type="password" id="password_match" />
-    <div id="password_compliance">
+    <div id="password_compliance" style="border: 2px solid red; display:none;">
     </div>
     <input type="button" value="submit" id="myButton" />
     <script>
@@ -23,7 +23,7 @@
         onComplies: passwordComplies,
         onDefies: passwordDefies,
         validateOnStart: false,
-        showAsFailOnStart: true
+        showAsFailOnStart: false
       });
 
       function passwordComplies() {

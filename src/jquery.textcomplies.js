@@ -191,6 +191,7 @@
          */
         var displayRules = function(results) {
           if (settings.output) {
+            settings.output.show();
             var html = "<ul>";
             if (settings.minLength > -1 && settings.maxLength > -1) {
               html += buildItem([settings.minLength, settings.maxLength], results.minLength && results.maxLength, settings.minAndMaxLengthText);
