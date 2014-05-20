@@ -84,10 +84,8 @@ Text Complies allows you to configure several preset rules for compliance checki
       }
     </style>
 
-Links
------
+## Links
 
 * Author:  [Rob Warner](http://github.com/hoop33)
 * Company: [Availity, LLC](http://www.availity.com)
 * License: [MIT](http://www.opensource.org/licenses/mit-license.php)
-* Demo:    http://availity.github.com/textcomplies.html
