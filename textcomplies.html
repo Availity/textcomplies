@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="src/jquery.textcomplies.js"></script>
+  </head>
+  <body>
+
+    <div>
+      <label for="password">Password:</label>
+      <br />
+      <input name="password" type="password" id="password" />
+
+      <br />
+
+      <label for="password_match">Confirm Password:</label>
+      <br />
+      <input name="password_match" type="password" id="password_match" />
+    </div>
+
+    <div id="password_compliance">
+    </div>
+
+    <input type="button" value="submit" id="my_button" disabled />
+
+    <script>
+      $('#password').textComplies({
+        output: $('#password_compliance'),
+        minLength: 3,
+        maxLength: 12,
+        numNumbers: 4,
+        disallowed: [ ' ', '$', 'password' ],
+        disallowedText: 'Contain no @',
+        matchField: $('#password_match'),
+        matchPattern: "^[A-Za-z]",
+        matchPatternText: "Start with a letter",
+        onComplies: passwordComplies,
+        onDefies: passwordDefies,
+        validateOnStart: false,
+        showAsFailOnStart: false
+      });
+
+      function passwordComplies() {
+        $('#my_button').removeAttr('disabled');
+      }
+
+      function passwordDefies() {
+        $('#my_button').attr('disabled', true);
+      }
+    </script>
+
+    <style>
+      body {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        margin: 40px;
+      }
+
+      .complies {
+        background-color: green;
+      }
+
+      .defies {
+        background-color: red;
+      }
+
+      #password_compliance {
+        border: 1px solid black;
+        display: none;
+      }
+    </style>
+  </body>
+</html>
