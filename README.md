@@ -1,87 +1,48 @@
-Text Complies
-====================
+# Text Complies
 
 A jQuery plugin that checks text input against a set of rules you specify and provides feedback in real time.
 
-Description
------------
+## Description
+
 With the Text Complies plugin, you can specify a set of rules that the input for a specified text field must comply with. As the user types in the field you're checking, the compliance level to the rules is updated, and you can report to the user which rules they're complying with and which rules they're defying.
 
 A typical usage for this plugin is with passwords; you can provide a set of rules (e.g., password must be 8-12 characters, contain one letter and one number, and can't contain spaces), and this plugin list the rules and whether or not the password the user is typing complies with those rules. As the user types the password, this plugin updates the compliance to the rules.
 
-Options
--------
+## Options
+
 Text Complies allows you to configure several preset rules for compliance checking, each with accompanying text that you can override. Rules you don't configure are not invoked. Your options are:
 
-<table>
-  <thead>
-    <tr>
-      <th>Option Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>minLength</td>
-      <td>The minimum allowable length of the text</td>
-    </tr>
-    <tr>
-      <td>maxLength</td>
-      <td>The maximum allowable length of the text</td>
-    </tr>
-    <tr>
-      <td>numNumbers</td>
-      <td>The minimum number of numbers (digits) that the text must contain</td>
-    </tr>
-    <tr>
-      <td>numUppercaseLetters</td>
-      <td>The minimum number of uppercase letters that the text must contain</td>
-    </tr>
-    <tr>
-      <td>numLowercaseLetters</td>
-      <td>The minimum number of lowercase letters that the text must contain</td>
-    </tr>
-    <tr>
-      <td>numLetters</td>
-      <td>The minimum number of letters that the text must contain</td>
-    </tr>
-    <tr>
-      <td>disallowed</td>
-      <td>An array containing strings that are disallowed in the text</td>
-    </tr>
-    <tr>
-      <td>matchField</td>
-      <td>The selector of a text field whose input must match the text</td>
-    </tr>
-    <tr>
-      <td>matchPattern</td>
-      <td>The regular expression that the text must match</td>
-    </tr>
-    <tr>
-      <td>validateOnStart</td>
-    <td>If <code>true</code>, runs validation on start, before waiting for a keypress</td>
-    </tr>
-    <tr>
-      <td>showAsFailOnStart</td>
-      <td>If <code>true</code>, shows the rules on start with them all failing</td>
-    </tr>
-    <tr>
-      <td>onComplies</td>
-      <td>A JavaScript method to run if the new text complies with all the configured rules</td>
-    </tr>
-    <tr>
-      <td>onDefies</td>
-      <td>A JavaScript method to run if the new text doesn't comply with all the configured rules</td>
-    </tr>
-    <tr>
-      <td>output</td>
-      <td>The selector of an HTML element in which to display the output of how the text complies with the rules</td>
-    </tr>
-  </tbody>
-</table>
+* `minLength`: the minimum allowable length of the text
+* `minLengthText`: the custom text to use for the minimum length rule
+* `maxLength`: the maximum allowable length of the text
+* `maxLengthText`: the custom text to use for the maximum length rule
+* `minAndMaxLengthText`: the custom text to use when you specify both a minimum length and maximum length
+* `showNumbersAsWords`: whether to show numbers less than 10 as words
+* `numNumbers`: the minimum number of numbers (digits) the text must contain
+* `numNumbersText`: the custom text to use for the number of numbers rule
+* `numUppercaseLetters`: the minimum number of uppercase letters the text must contain
+* `numUppercaseLettersText`: the custom text to use for the uppercase rule
+* `numLowercaseLetters`: the minimum number of lowercase letters the text must contain
+* `numLowercaseLettersText`: the custom text to use for the lowercase rule
+* `numLetters`: the minimum number of letters the text must contain
+* `numLettersText`: the custom text to use for the number of letters rule
+* `disallowed`: an array containing strings that the text can't contain
+* `disallowedText`: the custom text to use for the disallowed rule
+* `matchField`: the selector of a text field whose value must match the text
+* `matchFieldText`: the custom text to use for the match field rule
+* `matchPattern`: the regular expression that the text must match
+* `matchPatternCaseSensitive`: whether the regular expression is case sensitive
+* `matchPatternText`: the custom text to use for the match pattern rule
+* `disallowedPattern`: the regular expression that the text can't match
+* `disallowedPatternCaseSensitive`: whether the regular expression is case sensitive
+* `disallowedPatternText`: the custom text to use for the disallowed pattern rule
+* `validateOnStart`: whether to validate the rules on start
+* `showAsFailOnStart`: whether to show all the rules as failing on start
+* `output`: the selector of an HTML element in which to display the output of the rules
+* `onComplies`: a JavaScript method called if the text complies with all the configured rules
+* `onDefies`: a JavaScript method called if the text doesn't comply with any of the configured rules
 
-Usage
------
+## Usage
 
     <input name="password" type="password" id="password" />
     <input name="password_match" type="password" id="password_match" />
