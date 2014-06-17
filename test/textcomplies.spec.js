@@ -474,6 +474,28 @@ define(function(require) {
         });
         expect($("#password-compliance").html()).toEqual('<ul><li class="defies">Can\'t contain spaces, \'password\'</li></ul>');
       });
+
+      it("complies when multiple disallowed characters aren't present", function() {
+        var input = $("#my-password");
+        input.val('abc123');
+        input.textComplies({
+          disallowed: ['!', '@', '#', '$', '%'],
+          output: $("#password-compliance"),
+          validateOnStart: true
+        });
+        expect($("#password-compliance").html()).toEqual('<ul><li class="complies">Can\'t contain !, @, #, $, %</li></ul>');
+      });
+
+      it("defies when multiple disallowed characters are present", function() {
+        var input = $("#my-password");
+        input.val('!@#$%');
+        input.textComplies({
+          disallowed: ['!', '@', '#', '$', '%'],
+          output: $("#password-compliance"),
+          validateOnStart: true
+        });
+        expect($("#password-compliance").html()).toEqual('<ul><li class="defies">Can\'t contain !, @, #, $, %</li></ul>');
+      });
     });
 
     // Matching fields

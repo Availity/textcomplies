@@ -108,7 +108,7 @@
               var num = (showNumbersAsWords && array[index] < numbers.length) ? numbers[array[index]] : array[index];
               item = item.replace("#", num);
             }
-            item = item.replace("%", array[array.length - 1] === 1 ? "" : "s").replace("@", listWords(option));
+            item = item.replace("%", array[array.length - 1] === 1 ? "" : "s").replace("@", listWords(array));
           }
           return item === null ? '' : wrapItem(item, result);
         }
@@ -170,7 +170,7 @@
         /**
          * Returns an HTML version of a CSV list of the words in the specified array,
          * so that users can see a list of the specified words in a reader-friendly format.
-         * A space is converted to the text space
+         * A space is converted to the text 'space'
          * @param arr
          */
         function listWords(arr) {
